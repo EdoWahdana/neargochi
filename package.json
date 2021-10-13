@@ -28,9 +28,11 @@
   },
   "dependencies": {
     "near-api-js": "~0.41.0",
-    "regenerator-runtime": "~0.13.5",
-	"react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-loader-spinner": "^4.0.0",
+    "react-promise-tracker": "^2.1.0",
+    "regenerator-runtime": "~0.13.5"
   },
   "jest": {
     "testEnvironment": "near-cli/test_environment",

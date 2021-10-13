@@ -3,11 +3,11 @@ import PetStat from './PetStat'
 import PetZone from './PetZone'
 import UserAction from './UserAction'
 
-function GameContainer() {
+function GameContainer({ contract }) {
 	return (
 		<div id="container">
 			<div id="game-wrapper">
-				<PetStat />
+				<PetStat contract={contract} />
 				<PetZone />
 				<UserAction />
 			</div>

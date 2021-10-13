@@ -1,57 +1,35 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::{near_bindgen, setup_alloc};
-use serde::Serialize;
-use rand::{
-    distributions::{Distribution, Standard},
-    Rng,
-}; // 0.8.0
+use near_sdk::{env, near_bindgen, setup_alloc};
 
 setup_alloc!();
 
-//Fungsi utama mulai dari sini
-#[derive(BorshDeserialize, BorshSerialize, Serialize, Clone, Copy, Debug, Eq, PartialEq)]
-pub enum FaceTo {
-	LEFT,
-	RIGHT
-}
-
-impl Distribution<FaceTo> for Standard {
-    fn sample<R: Rng + ?Sized>(&self, rng: &mut R) -> FaceTo {
-        match rng.gen_range(0..2) {
-            0 => FaceTo::LEFT,
-            1 => FaceTo::RIGHT,
-			_ => FaceTo::LEFT
-        }
-    }
-}
 
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize)]
+#[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct Status {
-	id: i16,
 	weight: i16,
 	hunger: i16,
 	happines: i16,
 	is_sick: bool,
-	Facing: FaceTo
-}
-
-// Default value for every key pair
-impl Default for Status {
-	fn default() -> Self {
-		Self {
-			id: 1,
-			weight: 1,
-			hunger: 1,
-			happines: 4,
-			is_sick: false,
-			Facing: FaceTo::LEFT
-		}
-	}
 }
 
 #[near_bindgen]
 impl Status {
+	#[init]
+	pub fn new() -> Self {
+		assert!(env::state_read::<Self>().is_none(), "Already initialized");
+		Self {
+			weight: 1,
+			hunger: 1,
+			happines: 1,
+			is_sick: false,
+		}
+	}
+	
+	pub fn health_check(&self) -> bool {
+		if !self.is_sick { return true; }
+		else { return false; }
+	}
 	
 	pub fn get_weight(&self) -> i16 {
 		self.weight
@@ -61,9 +39,8 @@ impl Status {
 		self.hunger
 	}
 	
-	fn health_check(&self) -> bool {
-		if !self.is_sick { return true; }
-		else { return false; }
+	pub fn get_happines(&self) -> i16 {
+		self.happines
 	}
 	
 	pub fn medicine(&mut self) {
@@ -77,10 +54,18 @@ impl Status {
 		}
 	}
 	
-	pub fn play(&mut self) -> FaceTo {
-		self.Facing = rand::random();
-		self.Facing
+	/*
+	pub fn play(&mut self, value: i16) -> bool {
+		self.weight = i16::wrapping_sub(self.weight, 1);
+		self.hunger = i16::wrapping_sub(self.weight, 1);
+		
+		let random_value = get_random_value();
+		if random_value == value {
+			self.happines = i16::wrapping_add(self.happines, 1);
+			true
+		} else { false }
 	}
+	*/
 	
 	pub fn snack(&mut self) {
 		if self.health_check() {
@@ -151,6 +136,7 @@ mod tests {
 		let context = get_context(vec![], true);
 		testing_env!(context);
 		let mut contract = Status::default();
-		assert_eq!(FaceTo::LEFT, contract.play());
+		assert_eq!(true, contract.play(1));
+		assert_eq!(5, contract.get_happines())
 	}
 }

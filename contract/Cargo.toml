@@ -1,5 +1,5 @@
 [package]
-name = "greeter"
+name = "neargochi"
 version = "0.1.0"
 authors = ["Near Inc <hello@near.org>"]
 edition = "2018"
@@ -9,9 +9,6 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 near-sdk = "3.1.0"
-rand = "^0.8"
-getrandom = { version = "0.2.3", features = ["js"] }
-serde = { version = "1.0", features = ["derive"]}
 
 [profile.release]
 codegen-units = 1
