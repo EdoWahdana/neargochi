@@ -46698,13 +46698,7 @@ function login() {
   // the private key in localStorage.
   window.walletConnection.requestSignIn(nearConfig.contractName);
 }
-},{"near-api-js":"../node_modules/near-api-js/lib/browser-index.js","./config":"config.js"}],"assets/Icons/hungerbar/hungerbar100.png":[function(require,module,exports) {
-module.exports = "/hungerbar100.47fe6f48.png";
-},{}],"assets/Icons/healthbar/healthbar100.png":[function(require,module,exports) {
-module.exports = "/healthbar100.b23c8d59.png";
-},{}],"assets/Icons/happinessbar/happinessbar100.png":[function(require,module,exports) {
-module.exports = "/happinessbar100.a20a8b26.png";
-},{}],"components/PetStat.js":[function(require,module,exports) {
+},{"near-api-js":"../node_modules/near-api-js/lib/browser-index.js","./config":"config.js"}],"context/UserContext.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46714,33 +46708,128 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _hungerbar = _interopRequireDefault(require("../assets/Icons/hungerbar/hungerbar100.png"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _healthbar = _interopRequireDefault(require("../assets/Icons/healthbar/healthbar100.png"));
+var UserContext = _react.default.createContext({});
 
-var _happinessbar = _interopRequireDefault(require("../assets/Icons/happinessbar/happinessbar100.png"));
+var _default = UserContext;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"components/PetStat.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _UserContext = _interopRequireDefault(require("../context/UserContext"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function PetStat() {
+  // State for this component
+  var _useState = (0, _react.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      hunger = _useState2[0],
+      setHunger = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      happiness = _useState4[0],
+      setHappiness = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      healthy = _useState6[0],
+      setHealthy = _useState6[1]; // Get the UserContext);
+
+
+  var _useContext = (0, _react.useContext)(_UserContext.default),
+      walletConnection = _useContext.walletConnection,
+      contract = _useContext.contract; // Define image asset path for every stats
+
+
+  var hungerPath = '../assets/Icons/hungerbar/';
+  var happinessPath = '../assets/Icons/happinessbar/';
+  var healthPath = '../assets/Icons/healthbar/';
+  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (!contract) {
+              _context.next = 16;
+              break;
+            }
+
+            _context.t0 = setHunger;
+            _context.next = 4;
+            return contract.get_hunger();
+
+          case 4:
+            _context.t1 = _context.sent;
+            (0, _context.t0)(_context.t1);
+            _context.t2 = setHappiness;
+            _context.next = 9;
+            return contract.get_happines();
+
+          case 9:
+            _context.t3 = _context.sent;
+            (0, _context.t2)(_context.t3);
+            _context.t4 = setHealthy;
+            _context.next = 14;
+            return contract.health_check();
+
+          case 14:
+            _context.t5 = _context.sent;
+            (0, _context.t4)(_context.t5);
+
+          case 16:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  })));
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "pet-stats"
-  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
+  }, contract ? /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
     id: "hunger",
-    src: _hungerbar.default,
-    alt: "hunger"
-  })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
-    id: "health",
-    src: _healthbar.default
+    src: hungerPath + hunger + ".png"
   })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
     id: "happiness",
-    src: _happinessbar.default
-  }))));
+    src: happinessPath + happiness + ".png"
+  })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
+    id: "health",
+    src: healthPath + healthy + ".png"
+  }))) : /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null)));
 }
 
 var _default = PetStat;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../assets/Icons/hungerbar/hungerbar100.png":"assets/Icons/hungerbar/hungerbar100.png","../assets/Icons/healthbar/healthbar100.png":"assets/Icons/healthbar/healthbar100.png","../assets/Icons/happinessbar/happinessbar100.png":"assets/Icons/happinessbar/happinessbar100.png"}],"assets/Monkey/Animations/monkey_faceforward.png":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../context/UserContext":"context/UserContext.js"}],"assets/Monkey/Animations/monkey_faceforward.png":[function(require,module,exports) {
 module.exports = "/monkey_faceforward.288f4ccd.png";
 },{}],"components/PetZone.js":[function(require,module,exports) {
 "use strict";
@@ -46836,7 +46925,7 @@ function GameContainer() {
     id: "container"
   }, /*#__PURE__*/_react.default.createElement("div", {
     id: "game-wrapper"
-  }, /*#__PURE__*/_react.default.createElement(_PetStat.default, null), /*#__PURE__*/_react.default.createElement(_PetZone.default, null), /*#__PURE__*/_react.default.createElement(_UserAction.default, null)));
+  }, /*#__PURE__*/_react.default.createElement(_PetStat.default, null), /*#__PURE__*/_react.default.createElement(_PetZone.default, null)));
 }
 
 var _default = GameContainer;
@@ -49928,7 +50017,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactLoaderSpinner = _interopRequireDefault(require("react-loader-spinner"));
 
@@ -49938,10 +50027,35 @@ var _utils = require("../utils");
 
 var _UserAction = require("./UserAction");
 
+var _UserContext = _interopRequireDefault(require("../context/UserContext"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function ButtonPanel(_ref) {
-  var walletConnection = _ref.walletConnection;
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ButtonPanel() {
+  var _React$useState = _react.default.useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      load = _React$useState2[0],
+      setLoad = _React$useState2[1];
+
+  var _useContext = (0, _react.useContext)(_UserContext.default),
+      walletConnection = _useContext.walletConnection,
+      contract = _useContext.contract;
 
   var _usePromiseTracker = (0, _reactPromiseTracker.usePromiseTracker)({
     delay: 500
@@ -49949,6 +50063,7 @@ function ButtonPanel(_ref) {
       promiseInProgress = _usePromiseTracker.promiseInProgress;
 
   var logIn = function logIn() {
+    setLoad(true);
     (0, _reactPromiseTracker.trackPromise)(walletConnection.requestSignIn("neargochi.testnet", "Tamagotchi NEAR"));
   };
 
@@ -49957,30 +50072,41 @@ function ButtonPanel(_ref) {
     location.reload();
   };
 
+  var meal = function meal() {};
+
+  var medicine = function medicine() {};
+
+  var play = function play() {};
+
+  var snack = function snack() {};
+
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "button-panel"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Welcome to Tamagotchi Blockchain."), /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("h4", null, "Welcome to Tamagotchi Blockchain."), //Show these buttons if logged in
+  walletConnection.getAccountId() ? /*#__PURE__*/_react.default.createElement("div", {
     id: "button-panel"
   }, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: logIn,
+    onClick: meal,
     id: "btn feed"
   }, "Meal"), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: logIn,
+    onClick: snack,
     id: "btn"
   }, "Snack"), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: logIn,
+    onClick: medicine,
     id: "btn"
   }, "Medicine"), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: logIn,
+    onClick: play,
     id: "btn"
-  }, "Play")), !walletConnection.getAccountId() ? promiseInProgress ? /*#__PURE__*/_react.default.createElement(_reactLoaderSpinner.default, {
+  }, "Play")) : /*#__PURE__*/_react.default.createElement("p", null, "Login to start playing..!!"), // Show button login if not logged in, otherwise show logout button
+  !walletConnection.getAccountId() ? promiseInProgress ? /*#__PURE__*/_react.default.createElement(_reactLoaderSpinner.default, {
     type: "ThreeDots",
     color: "#2BAD60",
     width: "50"
   }) : /*#__PURE__*/_react.default.createElement("button", {
-    onClick: logIn,
-    id: "btn"
-  }, "Log In") : /*#__PURE__*/_react.default.createElement("button", {
+    id: "btn",
+    disabled: load,
+    onClick: logIn
+  }, " Log In") : /*#__PURE__*/_react.default.createElement("button", {
     onClick: logOut,
     id: "btn"
   }, "Log Out"));
@@ -49988,7 +50114,7 @@ function ButtonPanel(_ref) {
 
 var _default = ButtonPanel;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-loader-spinner":"../node_modules/react-loader-spinner/dist/index.js","react-promise-tracker":"../node_modules/react-promise-tracker/lib/index.js","../utils":"utils.js","./UserAction":"components/UserAction.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-loader-spinner":"../node_modules/react-loader-spinner/dist/index.js","react-promise-tracker":"../node_modules/react-promise-tracker/lib/index.js","../utils":"utils.js","./UserAction":"components/UserAction.js","../context/UserContext":"context/UserContext.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -50004,11 +50130,8 @@ var _ButtonPanel = _interopRequireDefault(require("./components/ButtonPanel"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function App(_ref) {
-  var walletConnection = _ref.walletConnection;
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_GameContainer.default, null), /*#__PURE__*/_react.default.createElement(_ButtonPanel.default, {
-    walletConnection: walletConnection
-  }));
+function App() {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_GameContainer.default, null), /*#__PURE__*/_react.default.createElement(_ButtonPanel.default, null));
 }
 
 var _default = App;
@@ -50029,6 +50152,8 @@ var nearAPI = _interopRequireWildcard(require("near-api-js"));
 var _utils = require("./utils");
 
 var _App = _interopRequireDefault(require("./App"));
+
+var _UserContext = _interopRequireDefault(require("./context/UserContext"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -50064,7 +50189,7 @@ function initContract() {
 
 function _initContract() {
   _initContract = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.default.mark(function _callee() {
-    var nearConfig, near, walletConnection, contract;
+    var nearConfig, near, walletConnection, account, contract;
     return _regeneratorRuntime.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -50079,22 +50204,25 @@ function _initContract() {
           case 3:
             near = _context.sent;
             // Make object to pass to components
-            walletConnection = new nearAPI.WalletConnection(near); // Initialize contract by contract name in config file
+            walletConnection = new nearAPI.WalletConnection(near); // Store the authorized account object
 
-            _context.next = 7;
+            account = walletConnection.account(); // Initialize contract by contract name in config file
+
+            _context.next = 8;
             return new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {
-              viewMethods: [],
-              callMethods: [],
+              viewMethods: ['health_check', 'get_weight', 'get_hunger', 'get_happines'],
+              callMethods: ['meal', 'medicine', 'snack'],
               sender: walletConnection.getAccountId()
             });
 
-          case 7:
+          case 8:
             contract = _context.sent;
             return _context.abrupt("return", {
-              walletConnection: walletConnection
+              walletConnection: walletConnection,
+              contract: contract
             });
 
-          case 9:
+          case 10:
           case "end":
             return _context.stop();
         }
@@ -50105,120 +50233,17 @@ function _initContract() {
 }
 
 window.nearInitPromise = initContract().then(function (_ref) {
-  var walletConnection = _ref.walletConnection;
+  var walletConnection = _ref.walletConnection,
+      contract = _ref.contract;
 
-  _reactDom.default.render( /*#__PURE__*/_react.default.createElement(_App.default, {
-    walletConnection: walletConnection
-  }), document.getElementById('root'));
-}); // global variable used throughout
-
-/*let currentGreeting
-
-const submitButton = document.querySelector('form button')
-
-document.querySelector('form').onsubmit = async (event) => {
-  event.preventDefault()
-
-  // get elements from the form using their id attribute
-  const { fieldset, greeting } = event.target.elements
-
-  // disable the form while the value gets updated on-chain
-  fieldset.disabled = true
-
-  try {
-    // make an update call to the smart contract
-    await window.contract.set_greeting({
-      // pass the value that the user entered in the greeting field
-      message: greeting.value
-    })
-  } catch (e) {
-    alert(
-      'Something went wrong! ' +
-      'Maybe you need to sign out and back in? ' +
-      'Check your browser console for more info.'
-    )
-    throw e
-  } finally {
-    // re-enable the form, whether the call succeeded or failed
-    fieldset.disabled = false
-  }
-
-  // disable the save button, since it now matches the persisted value
-  submitButton.disabled = true
-
-  // update the greeting in the UI
-  await fetchGreeting()
-
-  // show notification
-  document.querySelector('[data-behavior=notification]').style.display = 'block'
-
-  // remove notification again after css animation completes
-  // this allows it to be shown again next time the form is submitted
-  setTimeout(() => {
-    document.querySelector('[data-behavior=notification]').style.display = 'none'
-  }, 11000)
-}
-
-document.querySelector('input#greeting').oninput = (event) => {
-  if (event.target.value !== currentGreeting) {
-    submitButton.disabled = false
-  } else {
-    submitButton.disabled = true
-  }
-}
-
-document.querySelector('#sign-in-button').onclick = login
-document.querySelector('#sign-out-button').onclick = logout
-
-// Display the signed-out-flow container
-function signedOutFlow() {
-  document.querySelector('#signed-out-flow').style.display = 'block'
-}
-
-// Displaying the signed in flow container and fill in account-specific data
-function signedInFlow() {
-  document.querySelector('#signed-in-flow').style.display = 'block'
-
-  document.querySelectorAll('[data-behavior=account-id]').forEach(el => {
-    el.innerText = window.accountId
-  })
-
-  // populate links in the notification box
-  const accountLink = document.querySelector('[data-behavior=notification] a:nth-of-type(1)')
-  accountLink.href = accountLink.href + window.accountId
-  accountLink.innerText = '@' + window.accountId
-  const contractLink = document.querySelector('[data-behavior=notification] a:nth-of-type(2)')
-  contractLink.href = contractLink.href + window.contract.contractId
-  contractLink.innerText = '@' + window.contract.contractId
-
-  // update with selected networkId
-  accountLink.href = accountLink.href.replace('testnet', networkId)
-  contractLink.href = contractLink.href.replace('testnet', networkId)
-
-  fetchGreeting()
-}
-
-// update global currentGreeting variable; update DOM with it
-async function fetchGreeting() {
-  currentGreeting = await contract.get_greeting({ account_id: window.accountId })
-  document.querySelectorAll('[data-behavior=greeting]').forEach(el => {
-    // set divs, spans, etc
-    el.innerText = currentGreeting
-
-    // set input elements
-    el.value = currentGreeting
-  })
-}
-
-// `nearInitPromise` gets called on page load
-window.nearInitPromise = initContract()
-  .then(() => {
-    if (window.walletConnection.isSignedIn()) signedInFlow()
-    else signedOutFlow()
-  })
-  .catch(console.error)
-*/
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","regenerator-runtime":"../node_modules/regenerator-runtime/runtime.js","./config.js":"config.js","near-api-js":"../node_modules/near-api-js/lib/browser-index.js","./utils":"utils.js","./App":"App.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  _reactDom.default.render( /*#__PURE__*/_react.default.createElement(_UserContext.default.Provider, {
+    value: {
+      walletConnection: walletConnection,
+      contract: contract
+    }
+  }, /*#__PURE__*/_react.default.createElement(_App.default, null)), document.getElementById('root'));
+});
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","regenerator-runtime":"../node_modules/regenerator-runtime/runtime.js","./config.js":"config.js","near-api-js":"../node_modules/near-api-js/lib/browser-index.js","./utils":"utils.js","./App":"App.js","./context/UserContext":"context/UserContext.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -50246,7 +50271,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64217" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54755" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

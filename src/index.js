@@ -5,6 +5,7 @@ import getConfig from './config.js'
 import * as nearAPI from 'near-api-js'
 import { login, logout } from './utils'
 import App from './App'
+import UserContext from './context/UserContext'
 
 const { networkId } = getConfig(process.env.NODE_ENV || 'testnet')
 const { connect } = nearAPI
@@ -39,16 +40,16 @@ async function initContract() {
 		sender: walletConnection.getAccountId()
 	});
   
+	// Wrap all into one User object
 	return { walletConnection, contract };
 }
 
 window.nearInitPromise = initContract()
 	.then( ({ walletConnection, contract }) => {
 		ReactDOM.render (
-			<App 
-				walletConnection={walletConnection}
-				contract={contract}
-			/>, 
+			<UserContext.Provider value={{ walletConnection: walletConnection, contract: contract }}>
+				<App />
+			</UserContext.Provider>, 
 			document.getElementById('root')
 		)
 
