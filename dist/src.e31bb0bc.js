@@ -46763,17 +46763,8 @@ function PetStat() {
   var _useState5 = (0, _react.useState)(),
       _useState6 = _slicedToArray(_useState5, 2),
       healthy = _useState6[0],
-      setHealthy = _useState6[1]; // Get the UserContext);
+      setHealthy = _useState6[1];
 
-
-  var _useContext = (0, _react.useContext)(_UserContext.default),
-      walletConnection = _useContext.walletConnection,
-      contract = _useContext.contract; // Define image asset path for every stats
-
-
-  var hungerPath = '../assets/Icons/hungerbar/';
-  var happinessPath = '../assets/Icons/happinessbar/';
-  var healthPath = '../assets/Icons/healthbar/';
   (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -46812,25 +46803,34 @@ function PetStat() {
         }
       }
     }, _callee);
-  })));
+  }))); // Get the UserContext);
+
+  var _useContext = (0, _react.useContext)(_UserContext.default),
+      walletConnection = _useContext.walletConnection,
+      contract = _useContext.contract; // Define image asset path for every stats
+
+
+  var hungerPath = "Icons/hungerbar/".concat(hunger, ".png");
+  var happinessPath = "Icons/happinessbar/".concat(happiness, ".png");
+  var healthPath = "Icons/healthbar/".concat(healthy, ".png");
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "pet-stats"
   }, contract ? /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
     id: "hunger",
-    src: hungerPath + hunger + ".png"
+    src: "%PUBLIC_URL%/Icons/hungerbar/0.png"
   })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
     id: "happiness",
-    src: happinessPath + happiness + ".png"
+    src: undefined + happinessPath
   })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
     id: "health",
-    src: healthPath + healthy + ".png"
+    src: undefined + healthPath
   }))) : /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null), /*#__PURE__*/_react.default.createElement("li", null)));
 }
 
 var _default = PetStat;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../context/UserContext":"context/UserContext.js"}],"assets/Monkey/Animations/monkey_faceforward.png":[function(require,module,exports) {
-module.exports = "/monkey_faceforward.288f4ccd.png";
+},{"react":"../node_modules/react/index.js","../context/UserContext":"context/UserContext.js"}],"assets/Monkey/Animations/Spinning/6.png":[function(require,module,exports) {
+module.exports = "/6.ce7c6400.png";
 },{}],"components/PetZone.js":[function(require,module,exports) {
 "use strict";
 
@@ -46839,26 +46839,89 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-var _monkey_faceforward = _interopRequireDefault(require("../assets/Monkey/Animations/monkey_faceforward.png"));
+var _UserContext = _interopRequireDefault(require("../context/UserContext"));
+
+var _ = _interopRequireDefault(require("../assets/Monkey/Animations/Spinning/6.png"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function PetZone() {
+  var _useState = (0, _react.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      weight = _useState2[0],
+      setWeight = _useState2[1];
+
+  var _useContext = (0, _react.useContext)(_UserContext.default),
+      contract = _useContext.contract;
+
+  console.log(_.default);
+  (0, _react.useEffect)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var i, interval;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (!contract) {
+              _context.next = 6;
+              break;
+            }
+
+            _context.t0 = setWeight;
+            _context.next = 4;
+            return contract.get_weight();
+
+          case 4:
+            _context.t1 = _context.sent;
+            (0, _context.t0)(_context.t1);
+
+          case 6:
+            i = 1;
+            interval = setInterval(function () {
+              if (i == 6) clearInterval(interval);
+            }, 100);
+
+          case 8:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  })));
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "pet-zone"
   }, /*#__PURE__*/_react.default.createElement("img", {
     className: "pet",
     id: "pet",
-    src: _monkey_faceforward.default,
+    src: "/Monkey/Animations/Spinning/6.PNG",
     width: "100"
   }));
 }
 
 var _default = PetZone;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../assets/Monkey/Animations/monkey_faceforward.png":"assets/Monkey/Animations/monkey_faceforward.png"}],"assets/Icons/feed.png":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../context/UserContext":"context/UserContext.js","../assets/Monkey/Animations/Spinning/6.png":"assets/Monkey/Animations/Spinning/6.png"}],"assets/Icons/feed.png":[function(require,module,exports) {
 module.exports = "/feed.47a3853a.png";
 },{}],"assets/Icons/rest.png":[function(require,module,exports) {
 module.exports = "/rest.dc7330ba.png";
@@ -50035,6 +50098,10 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -50072,13 +50139,71 @@ function ButtonPanel() {
     location.reload();
   };
 
-  var meal = function meal() {};
+  var meal = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return contract.meal({});
 
-  var medicine = function medicine() {};
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
 
-  var play = function play() {};
+    return function meal(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 
-  var snack = function snack() {};
+  var snack = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return contract.snack({});
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function snack(_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var medicine = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(event) {
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return contract.medicine({});
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function medicine(_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
 
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "button-panel"
@@ -50087,7 +50212,7 @@ function ButtonPanel() {
     id: "button-panel"
   }, /*#__PURE__*/_react.default.createElement("button", {
     onClick: meal,
-    id: "btn feed"
+    id: "btn"
   }, "Meal"), /*#__PURE__*/_react.default.createElement("button", {
     onClick: snack,
     id: "btn"
@@ -50095,7 +50220,6 @@ function ButtonPanel() {
     onClick: medicine,
     id: "btn"
   }, "Medicine"), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: play,
     id: "btn"
   }, "Play")) : /*#__PURE__*/_react.default.createElement("p", null, "Login to start playing..!!"), // Show button login if not logged in, otherwise show logout button
   !walletConnection.getAccountId() ? promiseInProgress ? /*#__PURE__*/_react.default.createElement(_reactLoaderSpinner.default, {
@@ -50271,7 +50395,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54755" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59714" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

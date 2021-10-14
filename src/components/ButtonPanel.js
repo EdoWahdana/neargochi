@@ -26,10 +26,17 @@ function ButtonPanel() {
 		location.reload();
 	}
 	
-	const meal = () => {}
-	const medicine = () => {}
-	const play = () => {}
-	const snack = () => {}
+	const meal = async event => {
+		await contract.meal({});
+	}
+	
+	const snack = async event => {
+		await contract.snack({});
+	}
+	
+	const medicine = async event => {
+		await contract.medicine({});
+	}
 	
 	return (
 		<div id="button-panel">
@@ -40,10 +47,10 @@ function ButtonPanel() {
 				(walletConnection.getAccountId()) 
 				? 
 					<div id="button-panel">
-						<button onClick={meal} id="btn feed">Meal</button>
+						<button onClick={meal} id="btn">Meal</button>
 						<button onClick={snack} id="btn">Snack</button>
 						<button onClick={medicine} id="btn">Medicine</button>
-						<button onClick={play} id="btn">Play</button>
+						<button id="btn">Play</button>
 					</div>
 				: 
 					<p>Login to start playing..!!</p>
