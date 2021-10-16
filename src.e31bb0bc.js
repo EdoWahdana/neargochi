@@ -117,74 +117,114 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
+})({"index.js":[function(require,module,exports) {
+"use strict";
 
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
+var _react = _interopRequireDefault(require("react"));
 
-  return bundleURL;
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+var _regeneratorRuntime = _interopRequireDefault(require("regenerator-runtime"));
+
+var _config = _interopRequireDefault(require("./config.js"));
+
+var nearAPI = _interopRequireWildcard(require("near-api-js"));
+
+var _utils = require("./utils");
+
+var _App = _interopRequireDefault(require("./App"));
+
+var _UserContext = _interopRequireDefault(require("./context/UserContext"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var _getConfig = (0, _config.default)("development" || 'testnet'),
+    networkId = _getConfig.networkId;
+
+var connect = nearAPI.connect;
+var config = {
+  networkId: "testnet",
+  nodeUrl: "https://rpc.tesnet.near.org",
+  walleturl: "https://wallet.testnet.near.org",
+  helperUrl: "https://helper.testnet.near.org",
+  explorerUrl: "https://explorer.testnet.near.org"
+};
+
+function initContract() {
+  return _initContract.apply(this, arguments);
 }
 
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+function _initContract() {
+  _initContract = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.default.mark(function _callee() {
+    var nearConfig, near, walletConnection, account, contract;
+    return _regeneratorRuntime.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            nearConfig = (0, _config.default)("development" || 'testnet'); // Connect to wallet
 
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
+            _context.next = 3;
+            return nearAPI.connect(_objectSpread({
+              keyStore: new nearAPI.keyStores.BrowserLocalStorageKeyStore()
+            }, nearConfig));
 
-  return '/';
-}
+          case 3:
+            near = _context.sent;
+            // Make object to pass to components
+            walletConnection = new nearAPI.WalletConnection(near); // Store the authorized account object
 
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
-}
+            account = walletConnection.account(); // Initialize contract by contract name in config file
 
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
+            _context.next = 8;
+            return new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {
+              viewMethods: ['health_check', 'get_weight', 'get_hunger', 'get_happines'],
+              callMethods: ['meal', 'medicine', 'snack'],
+              sender: walletConnection.getAccountId()
+            });
 
-function updateLink(link) {
-  var newLink = link.cloneNode();
+          case 8:
+            contract = _context.sent;
+            return _context.abrupt("return", {
+              walletConnection: walletConnection,
+              contract: contract
+            });
 
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
+          case 10:
+          case "end":
+            return _context.stop();
+        }
       }
-    }
-
-    cssTimeout = null;
-  }, 50);
+    }, _callee);
+  }));
+  return _initContract.apply(this, arguments);
 }
 
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+window.nearInitPromise = initContract().then(function (_ref) {
+  var walletConnection = _ref.walletConnection,
+      contract = _ref.contract;
+
+  _reactDom.default.render( /*#__PURE__*/_react.default.createElement(_UserContext.default.Provider, {
+    value: {
+      walletConnection: walletConnection,
+      contract: contract
+    }
+  }, /*#__PURE__*/_react.default.createElement(_App.default, null)), document.getElementById('root'));
+});
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -212,7 +252,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59148" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55548" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -388,5 +428,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/index.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+//# sourceMappingURL=/src.e31bb0bc.js.map
