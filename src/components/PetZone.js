@@ -8,24 +8,19 @@ function PetZone() {
 	const { contract } = useContext(UserContext);
 	const pet = document.getElementById("pet");
 	
-	const animateMonkey = (max, seconds, animation) => {
-		let counter = 0;
-		const interval = setInterval( () => {
-			if(i == max) clearInterval(interval);
-			pet.src = animation.counter;
-		}, seconds);
-	}
-	
 	useEffect(async () => {
 		if(contract) setWeight(await contract.get_weight());
 		
-		animateMonkey(6, 100);
+		let i = 0;
+		const interval = setInterval( () => {
+			if(i == 5) clearInterval(interval);
+			pet.src = MonkeySpinning[i++];
+		}, 500);
 	});
-	console.log(MonkeyIdle);
 	
 	return (
 		<div id="pet-zone">
-			<img className="pet" id="pet" src={MonkeyIdle} width="100" />
+			<img className="pet" id="pet" src={MonkeyIdle[0]} width="100" />
 		</div>
 	)
 }

@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import UserContext from '../context/UserContext'
+import { hungerbar, happinessbar, healthbar } from './StatImages'
 
 function PetStat() {
 	
@@ -20,19 +21,14 @@ function PetStat() {
 	// Get the UserContext);
 	const { walletConnection, contract } = useContext(UserContext);
 	
-	// Define image asset path for every stats
-	const hungerPath = `Icons/hungerbar/${hunger}.png`;
-	const happinessPath = `Icons/happinessbar/${happiness}.png`;
-	const healthPath = `Icons/healthbar/${healthy}.png`;
-	
 	return (
 		<div id="pet-stats">
 		{
-			contract ?
+			walletConnection.getAccountId() ?
 			<ul>
-				<li><img id="hunger" src="%PUBLIC_URL%/Icons/hungerbar/0.png" /></li>
-				<li><img id="happiness" src={process.env.REACT_APP_PUBLIC_URL + happinessPath} /></li>
-				<li><img id="health" src={process.env.REACT_APP_PUBLIC_URL + healthPath} /></li>
+				<li><img id="hunger" src={hungerbar[hunger]} /></li>
+				<li><img id="happiness" src={happinessbar[happiness]} /></li>
+				<li><img id="health" src={healthbar[healthy]} /></li>
 			</ul>
 			: 
 			<ul>

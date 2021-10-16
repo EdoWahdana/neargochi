@@ -1,4 +1,4 @@
-const HungerImages = {
+/*const HungerImages = {
 	0: require('../assets/Icons/hungerbar/0.png'),
 	1: require('../assets/Icons/hungerbar/1.png'),
 	2: require('../assets/Icons/hungerbar/2.png'),
@@ -6,4 +6,4 @@ const HungerImages = {
 	4: require('../assets/Icons/hungerbar/4.png')
 }
 
-export default HungerImages;
+export default HungerImages;*/

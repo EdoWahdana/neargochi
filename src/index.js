@@ -36,18 +36,18 @@ async function initContract() {
 	// Initialize contract by contract name in config file
 	const contract = await new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {
 		viewMethods: ['health_check', 'get_weight', 'get_hunger', 'get_happines'],
-		callMethods: ['meal', 'medicine', 'snack'],
+		changeMethods: ['meal', 'medicine', 'snack'],
 		sender: walletConnection.getAccountId()
 	});
   
 	// Wrap all into one User object
-	return { walletConnection, contract };
+	return { walletConnection, contract, near };
 }
 
 window.nearInitPromise = initContract()
-	.then( ({ walletConnection, contract }) => {
+	.then( ({ walletConnection, contract, near }) => {
 		ReactDOM.render (
-			<UserContext.Provider value={{ walletConnection: walletConnection, contract: contract }}>
+			<UserContext.Provider value={{ walletConnection: walletConnection, contract: contract, near: near }}>
 				<App />
 			</UserContext.Provider>, 
 			document.getElementById('root')

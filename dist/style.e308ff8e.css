@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 body {
     margin: 0;
     padding: 0;
 }
 
 html {
-	background-color: #8BDFBDC4;
-	font-family: -apple-system,Poppins,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+	background-color: #8bd3bd;
+	font-family: 'Press Start 2P', cursive;
 	font-size: calc(0.9em + 0.5vw);
 }
 
@@ -21,6 +23,16 @@ html {
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
+}
+
+#button-grid {
+    display: flex;
+    flex-flow: wrap-reverse;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    align-content: center;
 }
 
 #container {
@@ -100,17 +112,19 @@ html {
 #btn {
 	color: #20bf6b !important;
 	text-transform: uppercase;
-	background: #ffffff;
+	background: #363a3c;
 	padding: 20px;
 	border: 4px solid #20bf6b !important;
 	border-radius: 6px;
 	display: inline-block;
 	transition: all 0.3s ease 0s;
+    width: 40%;
+    font-size: 1.1vw
 }
 
 #btn:hover {
 	cursor: pointer;
-	color: #494949 !important;
+	color: #25cd6b !important;
 	border-radius: 50px;
 	border-color: #494949 !important;
 	transition: all 0.3s ease 0s;
