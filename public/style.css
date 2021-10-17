@@ -35,6 +35,10 @@ html {
     align-content: center;
 }
 
+#button-grid > * {
+	margin: 1em 0;
+}
+
 #container {
     display: flex;
     flex-flow: column nowrap;

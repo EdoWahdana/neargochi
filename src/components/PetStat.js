@@ -26,8 +26,8 @@ function PetStat() {
 		{
 			walletConnection.getAccountId() ?
 			<ul>
-				<li><img id="hunger" src={hungerbar[hunger]} /></li>
-				<li><img id="happiness" src={happinessbar[happiness]} /></li>
+				<li><img id="hunger" src={(hunger > 4) ? hungerbar[4] : hungerbar[hunger]} /></li>
+				<li><img id="happiness" src={(happiness > 4) ? happinessbar[4] : happinessbar[happiness]} /></li>
 				<li><img id="health" src={healthbar[healthy]} /></li>
 			</ul>
 			: 

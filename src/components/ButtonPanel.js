@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
+import Big from 'big.js'
 import Loader from 'react-loader-spinner'
 import { usePromiseTracker, trackPromise } from 'react-promise-tracker'
 import { login, logout } from '../utils'
@@ -7,20 +8,11 @@ import UserContext from '../context/UserContext'
 
 function ButtonPanel() {
 	
+	const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 	const [load, setLoad] = useState(false);
-	const [balance, setBalance] = useState();
 	
 	const { walletConnection, contract, near } = useContext(UserContext);
 	const { promiseInProgress } = usePromiseTracker({delay: 500});
-	
-	useEffect(async () => {
-		if(walletConnection.getAccountId()) getBalance();
-	});
-	
-	const getBalance = (async () => {
-		const account = await near.account(walletConnection.getAccountId());
-		setBalance(await account.getAccountBalance());
-	});
 	
 	const logIn = () => {
 		setLoad(true);
@@ -38,15 +30,15 @@ function ButtonPanel() {
 	}
 	
 	const meal = async () => {
-		await contract.meal({}, 300000000000000, 100000000000000000000000);
+		await contract.meal({});
 	}
 	
 	const snack = async () => {
-		await contract.snack({}, 300000000000000, 100000000000000000000000);
+		await contract.snack({});
 	}
 	
 	const medicine = async () => {
-		await contract.medicine({}, 300000000000000, 100000000000000000000000);
+		await contract.medicine({});
 	}
 	
 	return (
@@ -61,7 +53,7 @@ function ButtonPanel() {
 					<div id="button-grid">
 						<button onClick={meal} id="btn"><img src={action.banana} style={{width: 20, paddingRight: 10}} />Meal</button>
 						<button onClick={snack} id="btn"><img src={action.snack} style={{width: 20, paddingRight: 10}} />Snack</button>
-						<button onClick={medicine} id="btn">Medicine</button>
+						<button onClick={medicine} id="btn"><img src={action.medicine} style={{width: 20, paddingRight: 10}} />Medicine</button>
 						<button id="btn">Play</button>
 					</div>
 				: 
@@ -78,11 +70,7 @@ function ButtonPanel() {
 							disabled={load} 
 							onClick={logIn}> Log In
 						  </button>
-					: 
-					<div>
-						<br/>
-						<button onClick={logOut} id="btn">Log Out</button>
-					</div>
+					: <button onClick={logOut} id="btn">Log Out</button>
 			}
 		</div>
 	)

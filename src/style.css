@@ -35,12 +35,16 @@ html {
     align-content: center;
 }
 
+#button-grid > * {
+	margin: 1em 0;
+}
+
 #container {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    background-image: url(/shell.52a84103.png);
+    background-image: url(./assets/shell.png);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -129,5 +133,3 @@ html {
 	border-color: #494949 !important;
 	transition: all 0.3s ease 0s;
 }
-
-/*# sourceMappingURL=/style.e308ff8e.css.map */

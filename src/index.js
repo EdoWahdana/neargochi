@@ -7,19 +7,10 @@ import { login, logout } from './utils'
 import App from './App'
 import UserContext from './context/UserContext'
 
-const { networkId } = getConfig(process.env.NODE_ENV || 'testnet')
 const { connect } = nearAPI
 
-const config = {
-	networkId: "testnet",
-	nodeUrl: "https://rpc.tesnet.near.org",
-	walleturl: "https://wallet.testnet.near.org",
-	helperUrl: "https://helper.testnet.near.org",
-	explorerUrl: "https://explorer.testnet.near.org"
-}
-
 async function initContract() {
-	const nearConfig = getConfig(process.env.NODE_ENV || 'testnet');	
+	const nearConfig = getConfig('testnet');	
 	
 	// Connect to wallet
 	const near = await nearAPI.connect({

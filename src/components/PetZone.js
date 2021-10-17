@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import UserContext from '../context/UserContext'
 import { MonkeySpinning, MonkeySick, MonkeyIdle } from './MonkeyImages'
+import UserContext from '../context/UserContext'
 
 function PetZone() {
 	

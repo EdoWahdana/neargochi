@@ -7,10 +7,15 @@ setup_alloc!();
 #[near_bindgen]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct Status {
-	weight: i16,
-	hunger: i16,
-	happines: i16,
+	weight: u8,
+	hunger: u8,
+	happines: u8,
 	is_sick: bool,
+}
+
+fn random_facing() -> u8 {
+	return env::random_seed()[1];
+	
 }
 
 #[near_bindgen]
@@ -31,15 +36,15 @@ impl Status {
 		else { return false; }
 	}
 	
-	pub fn get_weight(&self) -> i16 {
+	pub fn get_weight(&self) -> u8 {
 		self.weight
 	}
 	
-	pub fn get_hunger(&self) -> i16 {
+	pub fn get_hunger(&self) -> u8 {
 		self.hunger
 	}
 	
-	pub fn get_happines(&self) -> i16 {
+	pub fn get_happines(&self) -> u8 {
 		self.happines
 	}
 	
@@ -49,30 +54,28 @@ impl Status {
 	
 	pub fn meal(&mut self) {
 		if self.health_check() {
-			self.weight = i16::wrapping_add(self.weight, 1);
+			self.weight = u8::wrapping_add(self.weight, 1);
 			self.hunger = 4;
 		}
 	}
 	
-	/*
-	pub fn play(&mut self, value: i16) -> bool {
-		self.weight = i16::wrapping_sub(self.weight, 1);
-		self.hunger = i16::wrapping_sub(self.weight, 1);
+	pub fn play(&mut self, value: u8) -> bool {
+		self.weight = u8::wrapping_sub(self.weight, 1);
+		self.hunger = u8::wrapping_sub(self.weight, 1);
 		
-		let random_value = get_random_value();
+		let random_value = random_facing();
 		if random_value == value {
-			self.happines = i16::wrapping_add(self.happines, 1);
+			self.happines = u8::wrapping_add(self.happines, 1);
 			true
 		} else { false }
 	}
-	*/
 	
 	pub fn snack(&mut self) {
 		if self.health_check() {
 			if self.hunger > 4 { self.is_sick = true; }
 			
-			self.weight = i16::wrapping_add(self.weight, 2);
-			self.hunger = i16::wrapping_add(self.hunger, 1);
+			self.weight = u8::wrapping_add(self.weight, 2);
+			self.hunger = u8::wrapping_add(self.hunger, 1);
 		}
 	}
 	
@@ -137,6 +140,5 @@ mod tests {
 		testing_env!(context);
 		let mut contract = Status::default();
 		assert_eq!(true, contract.play(1));
-		assert_eq!(5, contract.get_happines())
 	}
 }
