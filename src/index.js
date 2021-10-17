@@ -27,7 +27,7 @@ async function initContract() {
 	// Initialize contract by contract name in config file
 	const contract = await new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {
 		viewMethods: ['health_check', 'get_weight', 'get_hunger', 'get_happines'],
-		changeMethods: ['meal', 'medicine', 'snack'],
+		changeMethods: ['meal', 'medicine', 'snack', 'play'],
 		sender: walletConnection.getAccountId()
 	});
   

@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState }	 from 'react'
 import GameContainer from './components/GameContainer'
 import ButtonPanel from './components/ButtonPanel'
 
 function App() {
+	
+	const [click, setClick] = useState(false);
+	
+	useEffect( async () => {
+		console.log(click);
+	});
+	
+	function change() {
+		click ? setClick(false) : setClick(true);
+	}
+	
 	return (
 		<>
-			<GameContainer />
-			<ButtonPanel />
+			<GameContainer  />
+			<ButtonPanel stateChanger={change} />
 		</>
 	)
 }
