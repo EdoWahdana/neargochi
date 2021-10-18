@@ -60,8 +60,15 @@ impl Status {
 	}
 	
 	pub fn play(&mut self, value: u8) -> bool {
-		self.weight = u8::wrapping_sub(self.weight, 1);
-		self.hunger = u8::wrapping_sub(self.weight, 1);
+		match self.weight.checked_sub(1) {
+		    Some(v) => { self.weight = v }
+		    None => { self.weight = self.weight }
+		}
+		
+		match self.hunger.checked_sub(1) {
+		    Some(v) => { self.hunger = v }
+		    None => { self.hunger = self.hunger }
+		}
 		
 		let random_value = random_facing();
 		if random_value == value {
@@ -139,6 +146,7 @@ mod tests {
 		let context = get_context(vec![], true);
 		testing_env!(context);
 		let mut contract = Status::default();
-		assert_eq!(true, contract.play(1));
+		contract.play(1);
+		assert_eq!(0, contract.get_weight());
 	}
 }
