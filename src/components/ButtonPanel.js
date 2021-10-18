@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Big from 'big.js'
 import Loader from 'react-loader-spinner'
 import { usePromiseTracker, trackPromise } from 'react-promise-tracker'
@@ -10,11 +10,16 @@ function ButtonPanel({ stateChanger }) {
 	
 	const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 	const [load, setLoad] = useState(false);
+	const [guess, setGuess] = useState();
 	const [panel, setPanel] = useState(false);
-	const [played, setPlayed] = useState(false);
+	const [played, setPlayed] = useState("");
 	
 	const { walletConnection, contract, near } = useContext(UserContext);
 	const { promiseInProgress } = usePromiseTracker({delay: 500});
+	
+	const clearPlayed = () => {
+		setPlayed("");
+	}
 	
 	const logIn = () => {
 		setLoad(true);
@@ -32,39 +37,40 @@ function ButtonPanel({ stateChanger }) {
 	}
 	
 	const meal = async () => {
-		await contract.meal({});
+		await contract.meal({}, BOATLOAD_OF_GAS, Big('0').times(10 ** 24).toFixed());
 		stateChanger();
 	}
 	const mealPromise = () => { trackPromise(meal()) }
 	
 	const snack = async () => {
-		await contract.snack({});
+		await contract.snack({}, BOATLOAD_OF_GAS, Big('0').times(10 ** 24).toFixed());
 		stateChanger();
 	}
 	const snackPromise = () => { trackPromise(snack()) }
 	
 	const medicine = async () => {
-		await contract.medicine({});
+		await contract.medicine({}, BOATLOAD_OF_GAS, Big('0').times(10 ** 24).toFixed());
 		stateChanger();
 	}
 	const medicinePromise = () => { trackPromise(medicine()) }	
 	
 	const play = async (e) => {
-		await contract.play({"value": e});
+		let facing = await contract.play({value: parseInt(e)}, BOATLOAD_OF_GAS, Big('0').times(10 ** 24).toFixed());
+		(facing) ? setGuess(true) : setGuess(false);
+		setPlayed("played");
 		stateChanger();
 	}
 	const playPromise = (e) => { trackPromise(play(e.target.value)) }
 	
-	
-	
 	const PlayPanel = () => (
 		<div id="button-grid">
 			<p style={{fontSize: 15}}>GUESS THE DIRECTION MONKEY WILL BE FACING : </p>
-			<button onClick={e => playPromise(e)} id="btn" value={0}>
+			
+			<button onClick={e => playPromise(e).then(clearPlayed)} id="btn" value={0}>
 				<img src={action.arrowLeft} style={{width: 20, paddingRight: 10}} />
 				LEFT
 			</button>
-			<button onClick={e => playPromise(e)} id="btn" value={1}>
+			<button onClick={e => playPromise(e).then(clearPlayed)} id="btn" value={1}>
 				RIGHT
 				<img src={action.arrowRight} style={{width: 20, paddingRight: 10}} />
 			</button>
@@ -77,6 +83,16 @@ function ButtonPanel({ stateChanger }) {
 		<div id="button-panel">
 			<img src={require("../assets/favicon.ico")} width="100"/>
 			{ (walletConnection.getAccountId()) ? <p>Lets Play..!!</p> : <h5>Welcome to Tamagotchi Blockchain.</h5> }
+			
+			{ (guess == true && played == "played")
+				? <p style={{fontSize: 15, color: "green"}}>CONGRATULATIONS!! YOU GUESSED IT CORRECTLY </p>
+				: null
+			}
+			
+			{ (guess == false && played == "played")
+				? <p style={{fontSize: 15, color: "red"}}>SNAP!! BETTER LUCK NEXT TIME </p>
+				: null
+			}
 			
 			{
 			//Show these buttons if logged in

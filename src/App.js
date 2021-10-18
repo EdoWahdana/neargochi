@@ -6,10 +6,6 @@ function App() {
 	
 	const [click, setClick] = useState(false);
 	
-	useEffect( async () => {
-		console.log(click);
-	});
-	
 	function change() {
 		click ? setClick(false) : setClick(true);
 	}

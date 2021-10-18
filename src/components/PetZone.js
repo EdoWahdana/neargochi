@@ -32,7 +32,8 @@ function PetZone() {
 					
 				}, 300);
 				
-				if(pet.width <= 300) pet.width = 100 + weight;
+				if(pet.width <= 250) pet.width = 100 + weight
+				else if(pet.width > 250) pet.width = 250;
 			});
 	});
 	
