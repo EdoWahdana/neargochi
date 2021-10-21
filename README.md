@@ -1,7 +1,7 @@
 Repo for neargochi
 ==================
 
-The demo can be found in : https://edowahdana.github.com/neargochi
+The demo can be found in : https://edowahdana.github.io/neargochi
 
 Still need a lot work to do, especially mobile friendly assets and transactionless contract.
 
