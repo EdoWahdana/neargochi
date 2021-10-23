@@ -1,7 +1,7 @@
 Repo for neargochi
 ==================
 
-![alt text](https://ibb.co/P4PHPnx)
+![alt text](https://github.com/EdoWahdana/neargochi/blob/master/Screenshot%20(360).png?raw=true)
 
 The demo can be found in : https://edowahdana.github.io/neargochi
 
